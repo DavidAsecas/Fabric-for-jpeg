@@ -16,21 +16,24 @@ const Chaincode = class {
         // use the invoke input arguments to decide intended changes
         console.info('Calling function: ' + fn);
 
-        if (fn === 'NewOwner') {
-            let result = await NewJpegOwner(stub, params);
+        if (fn === 'NewJpegOwner') {
+            let result = await this.NewJpegOwner(stub, params);
             if (result)
+                console.info(result);
                 return shim.success(Buffer.from('Success!'))
-        } else if (fn === 'QueryOwner') {
-            let result = await QueryJpegOwner(stub, params);
+        } else if (fn === 'QueryJpegOwner') {
+            let result = await this.QueryJpegOwner(stub, params);
             if (result)
                 return shim.success(Buffer.from(result.toString()))
         }
+        return shim.error('No function called!')
     }
 
     async NewJpegOwner(stub, args) {
         let image = args[0];
         let owner = args[1];
         try {
+            console.info(image + ' ' + owner);
             return await stub.putState(image, Buffer.from(owner));
         } catch (e) {
             return shim.error(e);
@@ -40,6 +43,7 @@ const Chaincode = class {
     async QueryJpegOwner(stub, args) {
         let image = args[0];
         try {
+            console.info(image);
             return await stub.getState(image);
         } catch (e) {
             return shim.error(e);

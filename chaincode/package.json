@@ -1,6 +1,6 @@
 {
     "name": "jpeg",
-    "version": "1.0.0",
+    "version": "1.6.0",
     "description": "hyperledger fabric blockchain",
     "engines": {
       "node": ">=8.4.0",
