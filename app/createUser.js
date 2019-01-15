@@ -4,8 +4,8 @@ const path = require('path');
 let fabric_client = new Fabric_Client();
 let user1 = null;
 let store_path = path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/ca');
-const privateKeyPath = path.join(store_path, 'a02ddcf21b3e9e3a292f99e8a8d2dc2c2be137406ed7edf2b92a0eb843642b90_sk');
-const signedCertPath = path.join(store_path, 'ca.dist.jpeg.com-cert.pem');
+const privateKeyPath = path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/msp/keystore/6e732ef7b7538132803f6f4af9a6548edac849cb1e96da3f394670e69fd0ff6a_sk');
+const signedCertPath = path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/msp/signcerts/User1@dist.jpeg.com-cert.pem');
 
 Fabric_Client.newDefaultKeyValueStore({
     path: store_path

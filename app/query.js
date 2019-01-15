@@ -5,10 +5,14 @@ let fs = require('fs');
 let fabric_client = new Fabric_Client();
 
 let serverCert = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/msp/tlscacerts/tlsca.dist.jpeg.com-cert.pem'));
+let clientCert = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/tls/client.crt'));
+let clientKey = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/tls/client.key'));
 
+// fabric_client.setTlsClientCertAndKey(Buffer.from(clientCert).toString(), Buffer.from(clientKey).toString());
 let channel = fabric_client.newChannel('channel1');
 let peer = fabric_client.newPeer('grpcs://localhost:7051', {
-    pem: Buffer.from(serverCert).toString()
+    pem: Buffer.from(serverCert).toString(),
+	"ssl-target-name-override": 'peer0.dist.jpeg.com'
 });
 channel.addPeer(peer);
 
