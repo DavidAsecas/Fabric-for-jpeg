@@ -8,18 +8,21 @@ let serverCert = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerO
 let clientCert = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/tls/client.crt'));
 let clientKey = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/tls/client.key'));
 
+let serverCert1 = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/buy1.jpeg.com/msp/tlscacerts/tlsca.buy1.jpeg.com-cert.pem'));
+let clientCert1 = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/buy1.jpeg.com/users/User1@buy1.jpeg.com/tls/client.crt'));
+let clientKey1 = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/buy1.jpeg.com/users/User1@buy1.jpeg.com/tls/client.key'));
+
 // fabric_client.setTlsClientCertAndKey(Buffer.from(clientCert).toString(), Buffer.from(clientKey).toString());
 let channel = fabric_client.newChannel('channel1');
-let peer = fabric_client.newPeer('grpcs://localhost:7051', {
-    pem: Buffer.from(serverCert).toString(),
-	"ssl-target-name-override": 'peer0.dist.jpeg.com'
+let peer = fabric_client.newPeer('grpcs://localhost:8051', {
+    pem: Buffer.from(serverCert1).toString(),
+	"ssl-target-name-override": 'peer0.buy1.jpeg.com'
 });
 channel.addPeer(peer);
 
 var member_user = null;
-let store_path = path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/ca');
+let store_path = path.join(__dirname, '..', 'crypto-config/peerOrganizations/buy1.jpeg.com/ca');
 console.log('Store path:'+store_path);
-var tx_id = null;
 
 // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
 Fabric_Client.newDefaultKeyValueStore({ path: store_path

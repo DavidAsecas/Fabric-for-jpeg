@@ -3,9 +3,9 @@ const path = require('path');
 
 let fabric_client = new Fabric_Client();
 let user1 = null;
-let store_path = path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/ca');
-const privateKeyPath = path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/msp/keystore/6e732ef7b7538132803f6f4af9a6548edac849cb1e96da3f394670e69fd0ff6a_sk');
-const signedCertPath = path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/msp/signcerts/User1@dist.jpeg.com-cert.pem');
+let store_path = path.join(__dirname, '..', 'crypto-config/peerOrganizations/buy1.jpeg.com/ca');
+const privateKeyPath = path.join(__dirname, '..', 'crypto-config/peerOrganizations/buy1.jpeg.com/users/User1@buy1.jpeg.com/msp/keystore/81ad52a9ed4e5af1401ec5903a62736c1e90a74840f9631d0e8a00c453224b1f_sk');
+const signedCertPath = path.join(__dirname, '..', 'crypto-config/peerOrganizations/buy1.jpeg.com/users/User1@buy1.jpeg.com/msp/signcerts/User1@buy1.jpeg.com-cert.pem');
 
 Fabric_Client.newDefaultKeyValueStore({
     path: store_path
@@ -24,7 +24,7 @@ Fabric_Client.newDefaultKeyValueStore({
     }
     return fabric_client.createUser({
         username: 'User1',
-        mspid: 'DistMSP',
+        mspid: 'Buy1MSP',
         cryptoContent: {
             privateKey: privateKeyPath,
             signedCert: signedCertPath
