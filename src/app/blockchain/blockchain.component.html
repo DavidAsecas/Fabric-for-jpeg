@@ -1,0 +1,31 @@
+<span style="text-align: center">
+    <span>
+        <select #org>
+            <option value="dist">Distributor</option>
+            <option value="buy1">Buyer 1</option>
+            <option value="buy2">Buyer 2</option>
+        </select>
+    </span>
+    <span>
+        <select #channel>
+            <option value="channel1">Channel 1</option>
+            <option value="channel2">Channel 2</option>
+        </select>
+    </span>
+</span>
+<div style="text-align: center; margin-top: 10%">
+    <input type="text" placeholder="imageID">
+    <input type="text" placeholder="owner">
+</div>
+<div style="text-align: center">
+    <button type="button" class="btn btn-primary">New image owner</button>
+</div>
+<div style="text-align: center; margin-top: 10%">
+    <input type="text" placeholder="imageID" #id>
+</div>
+<div style="text-align: center">
+    <button type="button" class="btn btn-primary" (click)='queryOwnerFromImage(channel.value, org.value, id.value)'>Query image owner</button>
+</div>
+<div style="text-align: center">
+    <output>{{owner}}</output>
+</div>
