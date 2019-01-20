@@ -7,20 +7,35 @@ import { Observable } from 'rxjs';
 })
 export class FabricService {
 
-    private fabricUrl = 'http://localhost:3000/api/queryOwner';
+    private queryUrl = 'http://localhost:3000/api/queryOwner';
+    private transactionUrl = 'http://localhost:3000/api/newOwner'
 
     constructor(private http: HttpClient) { }
 
     queryOwner(channel: string, org: string, image: string): Observable<any> {
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/json');
-        return this.http.get(this.fabricUrl, {
+        return this.http.get(this.queryUrl, {
             headers: headers,
             params: {
                 channel: channel,
                 org: org,
                 image: image
             }
+        });
+    }
+
+    newOwnerTransaction(channel: string, org: string, image: string, owner: string): Observable<any> {
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/json');
+        return this.http.post(this.transactionUrl, JSON.stringify({
+            channel: channel,
+            org: org,
+            image: image,
+            owner: owner
+        }), 
+        {
+            headers: headers
         });
     }
 }

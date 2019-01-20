@@ -19,6 +19,13 @@ export class BlockchainComponent {
                 this.owner = res.queryResponse;
             })
     }
+
+    newOwnerForImage(channel: string, org: string, image: string, owner: string) {
+        this.fabricService.newOwnerTransaction(channel, org, image, owner)
+            .subscribe(res => {
+                console.log(res.message)
+            })
+    }
     // createBlockchain() {
     //     // la manera de ir cambiando 'port' es provisional!!!
     //     let gethRequest: GethRequest = {

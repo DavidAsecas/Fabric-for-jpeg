@@ -1,8 +1,9 @@
 let express = require('express');
 let app = express();
 const bodyParser = require('body-parser');
-const query = require('./query')
-let cors = require('cors')
+const query = require('./query');
+const invoke = require('./invoke');
+let cors = require('cors');
 
 app.use(cors())
 app.options('*', cors())
@@ -12,20 +13,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let router = express.Router();
 
 router.post('/newOwner', function (req, res) {
-    let config = req.body.config;
-    if (req.body.request == "create") {
-        let message = geth.createBlockchain(config);
-        res.status(200).send({
-            message: message
-        })
-    } else if (req.body.request == "connect") {
-        geth.connectToBlockchain(config)
-            .then(message => {
-                res.status(200).send({
-                    message: message
-                })
+    let channel = req.body.channel;
+    let org = req.body.org;
+    let image = req.body.image;
+    let owner = req.body.owner;
+
+    console.log(req.body);
+    invoke.newOwnerTransaction(channel, org, image, owner)
+        .then(res => {
+            res.status(200).send({
+                message: message
             })
-    }
+        })
 })
 
 router.get('/queryOwner', function (req, res) {

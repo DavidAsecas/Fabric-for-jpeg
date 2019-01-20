@@ -2,7 +2,6 @@ let Fabric_Client = require('fabric-client');
 let path = require('path');
 let fs = require('fs');
 
-let fabric_client = new Fabric_Client();
 
 // let serverCert = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/'+org+'.jpeg.com/msp/tlscacerts/tlsca.'+org+'.jpeg.com-cert.pem'));
 // let clientCert = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/dist.jpeg.com/users/User1@dist.jpeg.com/tls/client.crt'));
@@ -14,6 +13,7 @@ let fabric_client = new Fabric_Client();
 
 module.exports.queryToChannel = function (ch, org, imagen) {
 	return new Promise((resolve, reject) => {
+		let fabric_client = new Fabric_Client();
 		let serverCert = fs.readFileSync(path.join(__dirname, '..', 'crypto-config/peerOrganizations/' + org + '.jpeg.com/msp/tlscacerts/tlsca.' + org + '.jpeg.com-cert.pem'));
 		let url;
 		if (org === 'dist') {
